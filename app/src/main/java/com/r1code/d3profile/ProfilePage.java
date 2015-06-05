@@ -13,6 +13,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.r1code.d3profile.contracts.DataUpdatedInterface;
 import com.r1code.d3profile.json.d3profile.Profile;
 
 import org.apache.http.Header;
@@ -45,37 +46,18 @@ public class ProfilePage extends Fragment {
         View view = inflater.inflate(R.layout.profile_page, container, false);
         ButterKnife.inject(this, view);
 
-        getProfile("profile/rafael25-1369/", null, new BaseJsonHttpResponseHandler<Profile>() {
+        DataHolder dataHolder = DataHolder.getInstance();
+
+        dataHolder.getProfile("rafael25#1369", new DataUpdatedInterface<Profile>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Profile response) {
-                battleTag.setText(response.getBattleTag());
-                lifeTimeKills.setText(response.getKills().getMonsters() + "");
-                eliteKills.setText(response.getKills().getElites() + "");
-                paragonLevel.setText(response.getParagonLevel() + "");
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Profile errorResponse) {
-            }
-
-            @Override
-            protected Profile parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                Profile profile = new Profile();
-                ObjectMapper mapper = new ObjectMapper();
-
-                if (!isFailure) {
-                    profile = mapper.readValue(rawJsonData, Profile.class);
-                }
-
-                return profile;
+            public void onDataUpdated(Profile data) {
+                battleTag.setText(data.getBattleTag());
+                lifeTimeKills.setText(data.getKills().getMonsters() + "");
+                eliteKills.setText(data.getKills().getElites() + "");
+                paragonLevel.setText(data.getParagonLevel() + "");
             }
         });
 
         return view;
-    }
-
-    private void getProfile(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://us.battle.net/api/d3/" + url, params, responseHandler);
     }
 }
