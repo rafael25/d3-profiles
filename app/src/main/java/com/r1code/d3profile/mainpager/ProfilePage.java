@@ -1,4 +1,4 @@
-package com.r1code.d3profile;
+package com.r1code.d3profile.mainpager;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import com.r1code.d3profile.DataHolder;
+import com.r1code.d3profile.R;
 import com.r1code.d3profile.contracts.DataUpdatedInterface;
 import com.r1code.d3profile.json.d3profile.Profile;
 

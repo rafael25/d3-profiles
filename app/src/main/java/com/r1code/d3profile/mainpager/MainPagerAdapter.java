@@ -1,4 +1,4 @@
-package com.r1code.d3profile;
+package com.r1code.d3profile.mainpager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +19,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if (position == 1) {
+            return new HeroesListPage();
+        }
         return new ProfilePage();
     }
 
