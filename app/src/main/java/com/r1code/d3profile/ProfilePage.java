@@ -13,8 +13,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.r1code.d3profile.http.DiabloAPIClient;
-import com.r1code.d3profile.json.Profile;
+import com.r1code.d3profile.json.d3profile.Profile;
 
 import org.apache.http.Header;
 

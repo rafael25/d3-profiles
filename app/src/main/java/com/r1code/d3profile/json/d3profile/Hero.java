@@ -1,4 +1,4 @@
-package com.r1code.d3profile.json;
+package com.r1code.d3profile.json.d3profile;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
