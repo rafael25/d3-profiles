@@ -5,5 +5,6 @@
     <color name="blue">#ff409699</color>
     <color name="greenDark">#3E5F22</color>
     <color name="darkGray">#ff3e4f5c</color>
+    <color name="darkGrayAlpha">#d23e4f5c</color>
     <color name="darkGrayBlue">#ff475057</color>
 </resources>
