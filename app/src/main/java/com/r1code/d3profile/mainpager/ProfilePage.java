@@ -10,10 +10,8 @@ import android.widget.TextView;
 
 import com.r1code.d3profile.DataHolder;
 import com.r1code.d3profile.R;
-import com.r1code.d3profile.contracts.DataUpdatedInterface;
+import com.r1code.d3profile.contracts.DataUpdatedHandler;
 import com.r1code.d3profile.json.d3profile.Profile;
-
-import org.apache.http.Header;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -45,7 +43,7 @@ public class ProfilePage extends Fragment {
 
         DataHolder dataHolder = DataHolder.getInstance();
 
-        dataHolder.getProfile("rafael25#1369", new DataUpdatedInterface<Profile>() {
+        dataHolder.getProfile("rafael25#1369", new DataUpdatedHandler<Profile>() {
             @Override
             public void onDataUpdated(Profile data) {
                 battleTag.setText(data.getBattleTag());

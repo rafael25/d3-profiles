@@ -2,7 +2,7 @@ package com.r1code.d3profile;
 
 import android.util.Log;
 
-import com.r1code.d3profile.contracts.DataUpdatedInterface;
+import com.r1code.d3profile.contracts.DataUpdatedHandler;
 import com.r1code.d3profile.http.DiabloAPIClient;
 import com.r1code.d3profile.json.d3profile.Profile;
 
@@ -28,17 +28,17 @@ public class DataHolder {
         return instance;
     }
 
-    public void getProfile(String battleTag, final DataUpdatedInterface<Profile> callback) {
+    public void getProfile(String battleTag, final DataUpdatedHandler<Profile> callback) {
 
         if (profiles.get(battleTag) != null) {
-            Log.i("DATA-HOLDER", "Datos accedidos desde Data Holder");
+            Log.i(DataHolder.class.getName(), "Datos accedidos desde Data Holder");
             callback.onDataUpdated(profiles.get(battleTag));
         }
 
         if (profiles.get(battleTag) == null) {
             DiabloAPIClient client = DiabloAPIClient.getInstance();
 
-            client.getProfile(battleTag, new DataUpdatedInterface<Profile>() {
+            client.getProfile(battleTag, new DataUpdatedHandler<Profile>() {
                 @Override
                 public void onDataUpdated(Profile data) {
                     profiles.put(data.getBattleTag(), data);

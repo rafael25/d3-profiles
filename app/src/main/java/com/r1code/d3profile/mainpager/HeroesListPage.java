@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.r1code.d3profile.DataHolder;
 import com.r1code.d3profile.R;
-import com.r1code.d3profile.contracts.DataUpdatedInterface;
+import com.r1code.d3profile.contracts.DataUpdatedHandler;
 import com.r1code.d3profile.json.d3profile.Hero;
 import com.r1code.d3profile.json.d3profile.Profile;
 
@@ -37,7 +37,10 @@ public class HeroesListPage extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.heroes_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        DataHolder.getInstance().getProfile("rafael25#1369", new DataUpdatedInterface<Profile>() {
+        heroesListAdapter = new HeroesListAdapter(heroes, this);
+        recyclerView.setAdapter(heroesListAdapter);
+
+        DataHolder.getInstance().getProfile("rafael25#1369", new DataUpdatedHandler<Profile>() {
             @Override
             public void onDataUpdated(Profile data) {
                 heroes.clear();
@@ -45,9 +48,6 @@ public class HeroesListPage extends Fragment {
                 heroesListAdapter.notifyDataSetChanged();
             }
         });
-
-        heroesListAdapter = new HeroesListAdapter(heroes, this);
-        recyclerView.setAdapter(heroesListAdapter);
 
         return view;
     }
