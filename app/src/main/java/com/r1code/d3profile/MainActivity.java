@@ -1,6 +1,7 @@
 package com.r1code.d3profile;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawer;
 
     private DrawerToggle drawerToggle;
+    private MainPagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        viewPager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+        pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        configurePagerAdapter();
+
+        viewPager.setAdapter(pagerAdapter);
         tabs.setupWithViewPager(viewPager);
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         toolbar.setNavigationIcon(R.mipmap.ic_drawer);
 
@@ -76,6 +82,16 @@ public class MainActivity extends AppCompatActivity {
 
         public DrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes, int closeDrawerContentDescRes) {
             super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+    }
+
+    private void configurePagerAdapter() {
+        int orientation = getResources().getConfiguration().orientation;
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            pagerAdapter.setPageWidth(0.3333f);
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            pagerAdapter.setPageWidth(1);
         }
     }
 }
