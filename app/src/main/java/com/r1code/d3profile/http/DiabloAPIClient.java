@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.r1code.d3profile.contracts.DataUpdatedHandler;
+import com.r1code.d3profile.json.d3hero.Hero;
 import com.r1code.d3profile.json.d3profile.Profile;
 
 import org.apache.http.Header;
@@ -24,12 +25,14 @@ public class DiabloAPIClient {
 
     private AsyncHttpClient client;
     private ObjectMapper mapper;
-    private List<DataUpdatedHandler> queue;
+    private List<DataUpdatedHandler> profileQueue;
+    private List<DataUpdatedHandler> heroQueue;
 
     private DiabloAPIClient() {
         client = new AsyncHttpClient();
         mapper = new ObjectMapper();
-        queue = new ArrayList<>();
+        profileQueue = new ArrayList<>();
+        heroQueue = new ArrayList<>();
     }
 
     public static DiabloAPIClient getInstance() {
@@ -41,17 +44,17 @@ public class DiabloAPIClient {
 
     public void getProfile(String battleTag, final DataUpdatedHandler<Profile> callback) {
         battleTag = battleTag.replace('#', '-');
-        queue.add(callback);
+        profileQueue.add(callback);
 
-        if (queue.size() == 1 /* Download only first time called */) {
+        if (profileQueue.size() == 1 /* Download only first time called */) {
             client.get(BASE_URL + "profile/" + battleTag + '/', null, new BaseJsonHttpResponseHandler<Profile>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Profile response) {
                     Log.i(DiabloAPIClient.class.getName(), "Consulta realizada a API");
-                    for (DataUpdatedHandler callback : queue) {
+                    for (DataUpdatedHandler callback : profileQueue) {
                         callback.onDataUpdated(response);
                     }
-                    queue.clear();
+                    profileQueue.clear();
                 }
 
                 @Override
@@ -67,6 +70,41 @@ public class DiabloAPIClient {
                     }
 
                     return profile;
+                }
+            });
+        }
+    }
+
+    public void getHero(String battleTag, final long heroId, final DataUpdatedHandler<Hero> callback) {
+        battleTag = battleTag.replace('#', '-');
+        heroQueue.add(callback);
+        final String url = BASE_URL + "profile/" + battleTag + "/hero/" + heroId;
+
+        if (heroQueue.size() == 1) {
+            client.get(url, null, new BaseJsonHttpResponseHandler<Hero>() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Hero response) {
+                    Log.i(DiabloAPIClient.class.getName(), "Consulta realizada a API");
+                    for (DataUpdatedHandler callback : heroQueue) {
+                        callback.onDataUpdated(response);
+                    }
+                    heroQueue.clear();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Hero errorResponse) {
+                    Log.e(DiabloAPIClient.class.getName(), "ERROR: " + statusCode + rawJsonData + throwable.toString());
+                }
+
+                @Override
+                protected Hero parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    Hero hero = new Hero();
+
+                    if (!isFailure) {
+                        hero = mapper.readValue(rawJsonData, Hero.class);
+                    }
+
+                    return hero;
                 }
             });
         }

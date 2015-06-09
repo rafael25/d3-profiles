@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.r1code.d3profile.mainpager.MainPagerAdapter;
-import com.squareup.otto.Bus;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerToggle drawerToggle;
     private MainPagerAdapter pagerAdapter;
-    public static final Bus bus = new Bus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

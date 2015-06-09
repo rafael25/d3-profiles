@@ -14,7 +14,7 @@ import java.util.Map;
 public class SimpleHero {
 
     @JsonProperty("paragonLevel")
-    private long paragonLevel;
+    private int paragonLevel;
 
     @JsonProperty("seasonal")
     private boolean seasonal;
@@ -26,7 +26,7 @@ public class SimpleHero {
     private long id;
 
     @JsonProperty("level")
-    private long level;
+    private int level;
 
     @JsonProperty("hardcore")
     private boolean hardcore;

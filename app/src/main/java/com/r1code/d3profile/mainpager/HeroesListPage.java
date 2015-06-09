@@ -15,9 +15,10 @@ import com.r1code.d3profile.DataHolder;
 import com.r1code.d3profile.MainActivity;
 import com.r1code.d3profile.R;
 import com.r1code.d3profile.contracts.DataUpdatedHandler;
-import com.r1code.d3profile.events.CurrentHeroId;
+import com.r1code.d3profile.events.CurrentHeroIdChanged;
 import com.r1code.d3profile.json.d3profile.SimpleHero;
 import com.r1code.d3profile.json.d3profile.Profile;
+import com.r1code.d3profile.services.OttoBusProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +53,9 @@ public class HeroesListPage extends Fragment {
                     HeroesListAdapter.ViewHolder vh = (HeroesListAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(position);
 
                     Log.i(HeroesListPage.class.getName(), "Item " + position + " touched");
-                    Log.i(view.getClass().getName(), view.toString());
 
                     DataHolder.getInstance().setCurrentHeroId(vh.heroId);
-                    MainActivity.bus.post(new CurrentHeroId(vh.heroId));
+                    OttoBusProvider.getInstance().post(new CurrentHeroIdChanged(vh.heroId));
                 }
             }));
         }
