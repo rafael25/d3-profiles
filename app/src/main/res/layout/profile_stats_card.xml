@@ -6,9 +6,9 @@
     android:layout_height="wrap_content"
     card_view:contentPadding="5dp"
     android:layout_gravity="center"
-    card_view:cardCornerRadius="2dp"
+    card_view:cardCornerRadius="@dimen/card_view_corner_radius"
     card_view:cardUseCompatPadding="true"
-    card_view:cardElevation="5dp">
+    card_view:cardElevation="@dimen/card_view_elevation">
 
     <LinearLayout
         android:orientation="vertical"

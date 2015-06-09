@@ -28,7 +28,7 @@ public class Profile {
     private Profile.Kills kills;
 
     @JsonProperty("heroes")
-    private List<Hero> heroes = new ArrayList<>();
+    private List<SimpleHero> heroes = new ArrayList<>();
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -74,12 +74,12 @@ public class Profile {
     }
 
     @JsonProperty("heroes")
-    public List<Hero> getHeroes() {
+    public List<SimpleHero> getHeroes() {
         return heroes;
     }
 
     @JsonProperty("heroes")
-    public void setHeroes(List<Hero> heroes) {
+    public void setHeroes(List<SimpleHero> heroes) {
         this.heroes = heroes;
     }
 

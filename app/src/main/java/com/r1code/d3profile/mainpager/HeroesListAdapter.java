@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.r1code.d3profile.R;
-import com.r1code.d3profile.json.d3profile.Hero;
+import com.r1code.d3profile.json.d3profile.SimpleHero;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class HeroesListAdapter extends RecyclerView.Adapter<HeroesListAdapter.Vi
     private static final int SPACE = 1;
 
     Fragment fragment;
-    List<Hero> heroes;
+    List<SimpleHero> heroes;
 
-    public HeroesListAdapter(List<Hero> heroes, Fragment fragment) {
+    public HeroesListAdapter(List<SimpleHero> heroes, Fragment fragment) {
         this.heroes = heroes;
         this.fragment = fragment;
     }
@@ -43,13 +43,14 @@ public class HeroesListAdapter extends RecyclerView.Adapter<HeroesListAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (position < getItemCount() - 1) {
-            Hero hero = heroes.get(position);
+            SimpleHero hero = heroes.get(position);
             String heroName = hero.getName();
             String heroClass = hero.getClass_();
 
             String imageName = "@mipmap/hero_portrait_" + heroClass.replace('-', '_') + "_" + hero.getGender();
             int portrait = fragment.getResources().getIdentifier(imageName, "mipmap", fragment.getActivity().getPackageName());
 
+            holder.heroId = hero.getId();
             holder.imageView.setImageResource(portrait);
             holder.level.setText("Level: "+hero.getLevel());
             holder.paragonLevel.setText("Paragon Level: "+hero.getParagonLevel());
@@ -76,6 +77,7 @@ public class HeroesListAdapter extends RecyclerView.Adapter<HeroesListAdapter.Vi
         public TextView level;
         public TextView paragonLevel;
         public ImageView imageView;
+        public long heroId;
 
         public ViewHolder(View v) {
             super(v);

@@ -7,4 +7,5 @@
     <color name="darkGray">#ff3e4f5c</color>
     <color name="darkGrayAlpha">#d23e4f5c</color>
     <color name="darkGrayBlue">#ff475057</color>
+    <color name="primary_text">#ff444444</color>
 </resources>

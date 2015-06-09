@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by rafael on 2/06/15.
  */
-public class Hero {
+public class SimpleHero {
 
     @JsonProperty("paragonLevel")
     private long paragonLevel;
@@ -46,7 +46,7 @@ public class Hero {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public Hero() {}
+    public SimpleHero() {}
 
     @JsonProperty("paragonLevel")
     public long getParagonLevel() {

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.r1code.d3profile.mainpager.MainPagerAdapter;
+import com.squareup.otto.Bus;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerToggle drawerToggle;
     private MainPagerAdapter pagerAdapter;
+    public static final Bus bus = new Bus();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         int orientation = getResources().getConfiguration().orientation;
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            pagerAdapter.setPageWidth(0.3333f);
+            pagerAdapter.setPageWidth(0.4f);
         } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             pagerAdapter.setPageWidth(1);
         }

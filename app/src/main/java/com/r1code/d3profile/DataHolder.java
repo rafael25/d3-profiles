@@ -16,9 +16,12 @@ public class DataHolder {
     private static DataHolder instance = null;
 
     private WeakHashMap<String, Profile> profiles;
+    private String currentBattleTag;
+    private long currentHeroId;
 
     private DataHolder() {
         profiles = new WeakHashMap<>();
+        currentBattleTag = "";
     }
 
     public static DataHolder getInstance() {
@@ -28,10 +31,11 @@ public class DataHolder {
         return instance;
     }
 
-    public void getProfile(String battleTag, final DataUpdatedHandler<Profile> callback) {
+    public void getProfile(final String battleTag, final DataUpdatedHandler<Profile> callback) {
 
         if (profiles.get(battleTag) != null) {
             Log.i(DataHolder.class.getName(), "Datos accedidos desde Data Holder");
+            currentBattleTag = battleTag;
             callback.onDataUpdated(profiles.get(battleTag));
         }
 
@@ -41,10 +45,27 @@ public class DataHolder {
             client.getProfile(battleTag, new DataUpdatedHandler<Profile>() {
                 @Override
                 public void onDataUpdated(Profile data) {
+                    currentBattleTag = battleTag;
                     profiles.put(data.getBattleTag(), data);
                     callback.onDataUpdated(data);
                 }
             });
         }
+    }
+
+    public void setCurrentBattleTag(String battleTag) {
+        this.currentBattleTag = battleTag;
+    }
+
+    public String getCurrentBattleTag() {
+        return currentBattleTag;
+    }
+
+    public long getCurrentHeroId() {
+        return currentHeroId;
+    }
+
+    public void setCurrentHeroId(long currentHeroId) {
+        this.currentHeroId = currentHeroId;
     }
 }
