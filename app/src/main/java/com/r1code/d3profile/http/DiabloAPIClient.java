@@ -50,7 +50,7 @@ public class DiabloAPIClient {
             client.get(BASE_URL + "profile/" + battleTag + '/', null, new BaseJsonHttpResponseHandler<Profile>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Profile response) {
-                    Log.i(DiabloAPIClient.class.getName(), "Consulta realizada a API");
+                    Log.i(DiabloAPIClient.class.getName(), "Consulta realizada a API (profile)");
                     for (DataUpdatedHandler callback : profileQueue) {
                         callback.onDataUpdated(response);
                     }
@@ -84,7 +84,7 @@ public class DiabloAPIClient {
             client.get(url, null, new BaseJsonHttpResponseHandler<Hero>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Hero response) {
-                    Log.i(DiabloAPIClient.class.getName(), "Consulta realizada a API");
+                    Log.i(DiabloAPIClient.class.getName(), "Consulta realizada a API (profile/hero)");
                     for (DataUpdatedHandler callback : heroQueue) {
                         callback.onDataUpdated(response);
                     }

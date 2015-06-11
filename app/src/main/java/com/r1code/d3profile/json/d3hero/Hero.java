@@ -34,11 +34,16 @@ public class Hero {
     private boolean seasonal;
     @JsonProperty("seasonCreated")
     private int seasonCreated;
-
     @JsonProperty("dead")
     private boolean dead;
     @JsonProperty("last-updated")
     private long lastUpdated;
+
+    @JsonProperty("stats")
+    private Stats stats;
+    @JsonProperty("items")
+    private Items items;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -151,6 +156,26 @@ public class Hero {
     @JsonProperty("last-updated")
     public void setLastUpdated(long lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    @JsonProperty("stats")
+    public Stats getStats() {
+        return stats;
+    }
+
+    @JsonProperty("stats")
+    public void setStats(Stats stats) {
+        this.stats = stats;
+    }
+
+    @JsonProperty("items")
+    public Items getItems() {
+        return items;
+    }
+
+    @JsonProperty("items")
+    public void setItems(Items items) {
+        this.items = items;
     }
 
     @JsonAnyGetter

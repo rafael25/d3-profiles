@@ -25,8 +25,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         addFragment("Profile", new ProfilePage());
         addFragment("Heroes", new HeroesListPage());
         addFragment("Hero Overview", new HeroPage());
+        addFragment("Items", new ItemsListPage());
 
-        addFragment("Profile", new ProfilePage());
         addFragment("Profile", new ProfilePage());
         addFragment("Profile", new ProfilePage());
         addFragment("Profile", new ProfilePage());

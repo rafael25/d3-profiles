@@ -41,18 +41,19 @@ public class HeroesListPage extends Fragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.heroes_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
 
         heroesListAdapter = new HeroesListAdapter(heroes, this);
         recyclerView.setAdapter(heroesListAdapter);
-        Context context = getActivity().getApplicationContext();
 
+        Context context = getActivity();
         if (context != null) {
             recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
                     HeroesListAdapter.ViewHolder vh = (HeroesListAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(position);
 
-                    Log.i(HeroesListPage.class.getName(), "Item " + position + " touched");
+                    Log.i(HeroesListPage.class.getName(), "Hero at position " + position + " touched");
 
                     DataHolder.getInstance().setCurrentHeroId(vh.heroId);
                     OttoBusProvider.getInstance().post(new CurrentHeroIdChanged(vh.heroId));

@@ -42,7 +42,7 @@ public class HeroesListAdapter extends RecyclerView.Adapter<HeroesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position < getItemCount() - 1) {
+        if (! isLastPosition(position)) {
             SimpleHero hero = heroes.get(position);
             String heroName = hero.getName();
             String heroClass = hero.getClass_();
@@ -65,11 +65,15 @@ public class HeroesListAdapter extends RecyclerView.Adapter<HeroesListAdapter.Vi
 
     @Override
     public int getItemViewType(int position) {
-        if (position + 1 == getItemCount()) {
+        if (isLastPosition(position)) {
             return SPACE;
         }
 
         return HERO_ITEM;
+    }
+
+    private boolean isLastPosition(int position) {
+        return position + 1 == getItemCount();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,12 +89,6 @@ public class HeroesListAdapter extends RecyclerView.Adapter<HeroesListAdapter.Vi
             level = (TextView) v.findViewById(R.id.level);
             paragonLevel = (TextView) v.findViewById(R.id.paragon_level);
             imageView = (ImageView) v.findViewById(R.id.hero_portrait);
-        }
-    }
-
-    public static class SpaceHolder extends RecyclerView.ViewHolder {
-        public SpaceHolder(View v) {
-            super(v);
         }
     }
 }

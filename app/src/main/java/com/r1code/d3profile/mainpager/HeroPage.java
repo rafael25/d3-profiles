@@ -65,8 +65,6 @@ public class HeroPage extends Fragment {
         heroPortrait.setScaleType(ImageView.ScaleType.CENTER);
         heroPortrait.startAnimation(loadAnimation);
 
-        DataHolder dataHolder = DataHolder.getInstance();
-
         updateView(24571053l);
 
         if (! isRegistered) {
