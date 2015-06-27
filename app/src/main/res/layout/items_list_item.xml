@@ -19,7 +19,7 @@
             android:id="@+id/item_icon"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:background="@color/darkGrayBlue"
+            android:background="@color/accentColor"
             android:layout_width="@dimen/item_image_width"
             android:layout_height="@dimen/item_image_height" />
 

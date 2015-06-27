@@ -7,5 +7,10 @@
     <color name="darkGray">#ff3e4f5c</color>
     <color name="darkGrayAlpha">#d23e4f5c</color>
     <color name="darkGrayBlue">#ff475057</color>
-    <color name="primary_text">#ff444444</color>
+    <color name="primaryText">#ff212121</color>
+    <color name="primaryColor">#ff009688</color>
+    <color name="primaryAlpha">#dd009688</color>
+    <color name="darkPrimaryColor">#ff00796b</color>
+    <color name="accentColor">#ff607d8b</color>
+    <color name="accentAlpha">#dd607d8b</color>
 </resources>

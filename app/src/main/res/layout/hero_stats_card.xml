@@ -15,8 +15,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Stats"
-            android:textSize="@dimen/text_size_large"
+            android:text="STATS"
+            android:textSize="@dimen/text_size_medium"
             android:gravity="center"
             android:textStyle="italic"
             android:textColor="@android:color/darker_gray"
