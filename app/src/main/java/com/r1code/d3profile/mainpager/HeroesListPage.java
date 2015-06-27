@@ -55,7 +55,6 @@ public class HeroesListPage extends Fragment {
 
                     Log.i(HeroesListPage.class.getName(), "Hero at position " + position + " touched");
 
-                    DataHolder.getInstance().setCurrentHeroId(vh.heroId);
                     OttoBusProvider.getInstance().post(new CurrentHeroIdChanged(vh.heroId));
                 }
             }));

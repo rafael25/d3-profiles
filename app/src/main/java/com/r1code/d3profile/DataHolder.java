@@ -3,9 +3,12 @@ package com.r1code.d3profile;
 import android.util.Log;
 
 import com.r1code.d3profile.contracts.DataUpdatedHandler;
+import com.r1code.d3profile.events.CurrentHeroIdChanged;
 import com.r1code.d3profile.http.DiabloAPIClient;
 import com.r1code.d3profile.json.d3hero.Hero;
 import com.r1code.d3profile.json.d3profile.Profile;
+import com.r1code.d3profile.services.OttoBusProvider;
+import com.squareup.otto.Subscribe;
 
 import java.util.WeakHashMap;
 
@@ -21,11 +24,20 @@ public class DataHolder {
 
     private String currentBattleTag;
     private long currentHeroId;
+    private boolean registered = false;
 
     private DataHolder() {
         profiles = new WeakHashMap<>();
         heroes = new WeakHashMap<>();
         currentBattleTag = "";
+
+        currentHeroId = 24571053l;
+        currentBattleTag = "rafael25#1369";
+
+        if (! registered) {
+            registered = true;
+            OttoBusProvider.getInstance().register(this);
+        }
     }
 
     public static DataHolder getInstance() {
@@ -91,7 +103,8 @@ public class DataHolder {
         return currentHeroId;
     }
 
-    public void setCurrentHeroId(long currentHeroId) {
-        this.currentHeroId = currentHeroId;
+    @Subscribe
+    public void setCurrentHeroId(CurrentHeroIdChanged currentHeroId) {
+        this.currentHeroId = currentHeroId.getId();
     }
 }

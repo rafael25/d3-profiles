@@ -51,7 +51,7 @@ public class ItemsListPage extends Fragment {
         itemsListAdapter = new ItemsListAdapter(heroItems);
         recyclerView.setAdapter(itemsListAdapter);
 
-        updateView(24571053l);
+        updateView(DataHolder.getInstance().getCurrentHeroId());
 
         return view;
     }
@@ -59,13 +59,19 @@ public class ItemsListPage extends Fragment {
     private void updateView(final long heroId) {
         DataHolder dataHolder = DataHolder.getInstance();
 
-        dataHolder.getHero("rafael25#1369", heroId, new DataUpdatedHandler<Hero>() {
+        dataHolder.getHero(dataHolder.getCurrentBattleTag(), heroId, new DataUpdatedHandler<Hero>() {
             @Override
             public void onDataUpdated(Hero data) {
                 heroItems.setItems(data.getItems().getItems());
                 itemsListAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateView(DataHolder.getInstance().getCurrentHeroId());
     }
 
     @Subscribe

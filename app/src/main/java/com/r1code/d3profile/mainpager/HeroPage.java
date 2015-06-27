@@ -65,7 +65,7 @@ public class HeroPage extends Fragment {
         heroPortrait.setScaleType(ImageView.ScaleType.CENTER);
         heroPortrait.startAnimation(loadAnimation);
 
-        updateView(24571053l);
+        updateView(DataHolder.getInstance().getCurrentHeroId());
 
         if (! isRegistered) {
             isRegistered = true;
@@ -78,7 +78,7 @@ public class HeroPage extends Fragment {
     private void updateView(final long heroId) {
         DataHolder dataHolder = DataHolder.getInstance();
 
-        dataHolder.getHero("rafael25#1369", heroId, new DataUpdatedHandler<Hero>() {
+        dataHolder.getHero(dataHolder.getCurrentBattleTag(), heroId, new DataUpdatedHandler<Hero>() {
             @Override
             public void onDataUpdated(Hero data) {
                 if (isAdded()) {
@@ -102,6 +102,12 @@ public class HeroPage extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateView(DataHolder.getInstance().getCurrentHeroId());
     }
 
     @Subscribe
